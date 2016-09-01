@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+
+<layout>
+   <adminhtml_rbmtemplate_template_index>
+       <reference name="content">
+            <block type="rbmTemplate/adminhtml_template" name="rbmTemplate_template" />
+       </reference>
+   </adminhtml_rbmtemplate_template_index>
+   <adminhtml_rbmtemplate_template_edit>
+       <update handle="plugincompany_codemirror" /> <!--syntax highlighter-->
+       
+       <reference name="head">
+           <action method="addItem">
+               <type>skin_css</type>
+               <css>css/rbm-template/style.css</css>
+           </action>        
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadRulesJs"><flag>1</flag></action>        
+       </reference>
+       
+       <reference name="content">
+            <block type="rbmTemplate/adminhtml_template_edit" name="rbmTemplate_template_edit"/>
+       </reference>
+       <reference name="left">
+            <block type="rbmTemplate/adminhtml_template_edit_tabs" name="rbmTemplate_template_edit_tabs">
+                <block type="rbmTemplate/adminhtml_template_edit_tab_main" name="rbmTemplate_template_edit_main" />
+                <block type="rbmTemplate/adminhtml_template_edit_tab_content" name="rbmTemplate_template_edit_content" />
+                <block type="rbmTemplate/adminhtml_template_edit_tab_conditions" name="rbmTemplate_template_edit_conditions" />
+                
+                <action method="addTab"><name>main_section</name><block>rbmTemplate_template_edit_main</block></action>
+                <action method="addTab"><name>content_section</name><block>rbmTemplate_template_edit_content</block></action>
+                <action method="addTab"><name>conditions_section</name><block>rbmTemplate_template_edit_conditions</block></action>
+                
+            </block>
+        </reference>
+   </adminhtml_rbmtemplate_template_edit>
+</layout>

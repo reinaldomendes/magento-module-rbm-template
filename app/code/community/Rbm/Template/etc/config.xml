@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Mage
+ * @package     Mage_Captcha
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Rbm_Template>
+            <version>1.0.0</version>
+        </Rbm_Template>
+    </modules>
+    
+    <global> 
+        
+        <models>            
+            <rbmTemplate>
+                <class>Rbm_Template_Model</class>                
+                <resourceModel>rbmTemplate_resource</resourceModel>
+            </rbmTemplate> 
+            <rbmTemplate_resource>
+                <class>Rbm_Template_Model_Resource</class>
+                <entities>
+                    <template>
+                        <table>rbm_template_templates</table>
+                    </template>
+                    <filters>
+                        <table>rbm_template_filters</table>
+                    </filters>
+                </entities>
+            </rbmTemplate_resource>            
+        </models>        
+        
+        <resources>
+            <rbmTemplate_setup>
+                <setup>
+                    <module>Rbm_Template</module>
+                    <class>Rbm_Template_Model_Resource_Setup</class>
+                </setup>
+            </rbmTemplate_setup>
+        </resources>
+        <helpers>            
+            <rbmTemplate>
+                <class>Rbm_Template_Helper</class>
+            </rbmTemplate>            
+        </helpers>
+        
+        <blocks>
+            <plugincompany_syntaxhighlighter>
+                <rewrite>
+                    <syntaxhighlighter>Rbm_Template_Block_Rewrite_Stynaxhighlighter</syntaxhighlighter>
+                </rewrite>
+            </plugincompany_syntaxhighlighter> 
+            <rbmTemplate_adminhtml>
+                <class>Rbm_Template_Block_Adminhtml</class>
+            </rbmTemplate_adminhtml>           
+            <rbmTemplate>
+                <class>Rbm_Template_Block</class>
+            </rbmTemplate>            
+        </blocks>
+        
+    </global>   
+    
+    
+    
+    
+    <frontend>
+        <routers>
+            <rbmTemplate>
+                <use>standard</use>
+                <args>
+                    <module>Rbm_Template</module>
+                    <frontName>rt</frontName>
+                </args>
+            </rbmTemplate>
+        </routers>
+        <layout>
+            <updates>
+                <Rbm_Template>
+                    <file>rbm-template.xml</file>
+                </Rbm_Template>
+            </updates> 
+        </layout>
+        <!--        <translate>
+            <modules>
+                <Rbm_Facebook>
+                    <files>
+                        <default>Rbm_Template.csv</default>
+                    </files>
+                </Rbm_Facebook>
+            </modules>
+        </translate>-->
+    </frontend>
+    <admin>        
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <rbmTemplate before="Mage_Adminhtml">Rbm_Template_Adminhtml</rbmTemplate>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>	
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <Rbm_Template>
+                    <file>rbm-template.xml</file>
+                </Rbm_Template>
+            </updates> 
+        </layout>
+    </adminhtml>
+    
+</config>

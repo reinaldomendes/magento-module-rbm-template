@@ -1,0 +1,8 @@
+#rbmTemplate_tabs_content_section_content #rbmTemplate_content_fieldset td.value{
+    width:80%;
+}
+#rbmTemplate_tabs_content_section_content #rbmTemplate_content_fieldset td.value textarea,
+#rbmTemplate_tabs_content_section_content #rbmTemplate_content_fieldset td.value code{
+    width:100%;
+    height: 60vh;
+}
