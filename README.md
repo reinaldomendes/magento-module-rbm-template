@@ -1,5 +1,7 @@
 # magento-module-rbm-template
-
+![Alt text](README/path/to/img-info.jpg?raw=true "Template Information")
+![Alt text](README/path/to/img-content.jpg?raw=true "Template Content")
+![Alt text](README/path/to/img-conditions.jpg?raw=true "Template Conditions")
 
 
 # Google shopping rss 2.0
