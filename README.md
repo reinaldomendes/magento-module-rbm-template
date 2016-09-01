@@ -1,5 +1,5 @@
 # magento-module-rbm-template
-![Alt text](README/screenshots/img-info.jpg?raw=true "Template Information")
+![Alt text](README/screenshots/img-info.jpg "Template Information")
 ![Alt text](README/screenshots/img-content.jpg?raw=true "Template Content")
 ![Alt text](README/screenshots/img-conditions.jpg?raw=true "Template Conditions")
 
