@@ -48,6 +48,14 @@ class Rbm_Template_Block_Adminhtml_Template_Edit_Tab_Main
             'required'  => true,
             'disabled'  => $isElementDisabled
         ));
+        
+        $fieldset->addField('description', 'textarea', array(
+            'name'      => 'description',
+            'label'     => Mage::helper('rbmTemplate')->__('Description text'),
+            'title'     => Mage::helper('rbmTemplate')->__('Description text'),
+            'required'  => true,
+            'disabled'  => $isElementDisabled
+        ));
 
         $note = null;
         if($model->getCode()){
