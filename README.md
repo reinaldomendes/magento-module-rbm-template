@@ -55,7 +55,7 @@ Its integrates with Plugin Company Syntax Highlighter module https://github.com/
 
 
 
-##screenshots
+## Screenshots
 ![Alt text](README/screenshots/img-info.png?raw=true "Template Information")
 ![Alt text](README/screenshots/img-content.png?raw=true "Template Content")
 ![Alt text](README/screenshots/img-conditions.png?raw=true "Template Conditions")
