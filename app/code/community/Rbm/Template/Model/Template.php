@@ -24,7 +24,7 @@ class Rbm_Template_Model_Template extends Mage_Rule_Model_Rule
         if(! $this->getCode() ){
             return null;
         }
-        return Mage::getBaseUrl() . 'rt/' . $this->getCode();
+        return Mage::getBaseUrl() . 'feed/' . $this->getCode();
     }
 
     /**
