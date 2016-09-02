@@ -47,9 +47,12 @@
 ```
 
 ## Syntax Highlighter
-Its integrates with Plugin Company Syntax Highlighter module
 
-(https://github.com/PluginCompany/magento-syntax-highlighter)
+Its integrates with Plugin Company Syntax Highlighter module https://github.com/PluginCompany/magento-syntax-highlighter
+
+
+
+
 
 
 ##screenshots
