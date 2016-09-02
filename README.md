@@ -1,10 +1,11 @@
 # magento-module-rbm-template
-![Alt text](README/screenshots/img-info.png?raw=true "Template Information")
-![Alt text](README/screenshots/img-content.png?raw=true "Template Content")
-![Alt text](README/screenshots/img-conditions.png?raw=true "Template Conditions")
+
+## Multi use templates with magento markup syntax.
+  Create your feed rss, json, csv, or any other text type file.
 
 
-# Google shopping rss 2.0
+
+## Google shopping rss 2.0
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
@@ -44,3 +45,8 @@
     </channel>
 </rss>
 ```
+
+##screenshots
+![Alt text](README/screenshots/img-info.png?raw=true "Template Information")
+![Alt text](README/screenshots/img-content.png?raw=true "Template Content")
+![Alt text](README/screenshots/img-conditions.png?raw=true "Template Conditions")
