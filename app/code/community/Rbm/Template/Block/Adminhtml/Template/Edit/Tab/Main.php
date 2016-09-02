@@ -57,17 +57,15 @@ class Rbm_Template_Block_Adminhtml_Template_Edit_Tab_Main
             'disabled'  => $isElementDisabled
         ));
 
-        $note = null;
-        if($model->getCode()){
-            $note = "<a href='{$model->getUrl()}'>{$model->getUrl()}</a>";
-        }
+        
+        
         $fieldset->addField('code', 'text', array(
             'name'      => 'code',
             'label'     => Mage::helper('rbmTemplate')->__('URL Key'),
             'title'     => Mage::helper('rbmTemplate')->__('URL Key'),
             'required'  => true,
             'class'     => 'validate-identifier',
-            'note'      => $note,
+            'note'      => $model->getUrlWithAnchor(),
             'disabled'  => $isElementDisabled
         ));
 

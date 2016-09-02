@@ -77,6 +77,13 @@ class Rbm_Template_Block_Adminhtml_Template_Grid extends Mage_Adminhtml_Block_Wi
             'type'      => 'options',
             'options'   => Mage::getSingleton('rbmTemplate/template')->getAvailableStatuses()
         ));
+        
+         $this->addColumn('url', array(
+            'header'    => Mage::helper('cms')->__('Url'),
+            'getter'     => 'getUrlWithAnchor',
+            'type'      => 'text',
+            'filter' => false
+        ));
 
         return parent::_prepareColumns();
     }
