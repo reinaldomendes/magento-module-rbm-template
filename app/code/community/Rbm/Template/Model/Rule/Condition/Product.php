@@ -3,7 +3,7 @@
 class Rbm_Template_Model_Rule_Condition_Product extends Mage_Rule_Model_Condition_Product_Abstract
 {
 
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -14,7 +14,7 @@ class Rbm_Template_Model_Rule_Condition_Product extends Mage_Rule_Model_Conditio
     {
         parent::_addSpecialAttributes($attributes);
 
-        $attributes['status'] = Mage::helper('rbmTemplate')->__('Status');
+        // $attributes['status'] = Mage::helper('rbmTemplate')->__('Status');
         $attributes['type_id'] = Mage::helper('rbmTemplate')->__('Product Type');
     }
 
@@ -70,12 +70,12 @@ class Rbm_Template_Model_Rule_Condition_Product extends Mage_Rule_Model_Conditio
 //        $attribute = $this->getAttribute();
 //        if('category_ids' == $attribute){
 ////            $attribute = 'category_id';
-//            
+//
 //            $select = $collection->getResource()->getReadConnection()->select()->distinct()
 //            ->from($collection->getTable('catalog/category_product_index'), array('product_id'))
 //            ->where('is_parent = 1 AND e.entity_id = product_id');
-//            
-//            
+//
+//
 //            $select->where('category_id in (?)',$this->getValue());
 //            switch($this->getOperator()){
 //                case '()':
@@ -84,10 +84,10 @@ class Rbm_Template_Model_Rule_Condition_Product extends Mage_Rule_Model_Conditio
 //                    break;
 //                case '!()':
 //                case '!=':
-//                    $collection->getSelect()->where("NOT exists( {$select})");           
+//                    $collection->getSelect()->where("NOT exists( {$select})");
 //                    break;
-//            }            
-//            
+//            }
+//
 //            return null;
 //        }
 //        $result = array(
