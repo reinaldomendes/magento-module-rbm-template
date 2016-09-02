@@ -1,7 +1,7 @@
 # magento-module-rbm-template
-![Alt text](README/screenshots/img-info.jpg?raw=true "Template Information")
-![Alt text](README/screenshots/img-content.jpg?raw=true "Template Content")
-![Alt text](README/screenshots/img-conditions.jpg?raw=true "Template Conditions")
+![Alt text](https://github.com/reinaldomendes/magento-module-rbm-template/blob/master/README/screenshots/img-info.jpg?raw=true "Template Information")
+![Alt text](https://github.com/reinaldomendes/magento-module-rbm-template/blob/master/README/screenshots/img-content.jpg?raw=true "Template Content")
+![Alt text](https://github.com/reinaldomendes/magento-module-rbm-template/blob/master/README/screenshots/img-conditions.jpg?raw=true "Template Conditions")
 
 
 # Google shopping rss 2.0
