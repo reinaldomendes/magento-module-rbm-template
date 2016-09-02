@@ -46,6 +46,12 @@
 </rss>
 ```
 
+## Syntax Highlighter
+Its integrates with Plugin Company Syntax Highlighter module
+
+(https://github.com/PluginCompany/magento-syntax-highlighter)
+
+
 ##screenshots
 ![Alt text](README/screenshots/img-info.png?raw=true "Template Information")
 ![Alt text](README/screenshots/img-content.png?raw=true "Template Content")

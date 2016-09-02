@@ -33,7 +33,7 @@ class Rbm_Template_Block_Adminhtml_Template_Edit_Tab_Main
 
         $form->setHtmlIdPrefix('rbmTemplate_');
 
-        $fieldset = $form->addFieldset('base_fieldset', array('legend'=>Mage::helper('cms')->__('Template Information')));
+        $fieldset = $form->addFieldset('base_fieldset', array('legend'=>Mage::helper('rbmTemplate')->__('Template Information')));
 
         if ($model->getId()) {
             $fieldset->addField('template_id', 'hidden', array(
