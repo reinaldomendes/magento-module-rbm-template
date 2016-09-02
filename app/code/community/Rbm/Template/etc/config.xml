@@ -31,14 +31,14 @@
             <version>1.0.0</version>
         </Rbm_Template>
     </modules>
-    
-    <global> 
-        
-        <models>            
+
+    <global>
+
+        <models>
             <rbmTemplate>
-                <class>Rbm_Template_Model</class>                
+                <class>Rbm_Template_Model</class>
                 <resourceModel>rbmTemplate_resource</resourceModel>
-            </rbmTemplate> 
+            </rbmTemplate>
             <rbmTemplate_resource>
                 <class>Rbm_Template_Model_Resource</class>
                 <entities>
@@ -49,9 +49,9 @@
                         <table>rbm_template_filters</table>
                     </filters>
                 </entities>
-            </rbmTemplate_resource>            
-        </models>        
-        
+            </rbmTemplate_resource>
+        </models>
+
         <resources>
             <rbmTemplate_setup>
                 <setup>
@@ -60,31 +60,37 @@
                 </setup>
             </rbmTemplate_setup>
         </resources>
-        <helpers>            
+        <helpers>
             <rbmTemplate>
                 <class>Rbm_Template_Helper</class>
-            </rbmTemplate>            
+            </rbmTemplate>
         </helpers>
-        
+
         <blocks>
             <plugincompany_syntaxhighlighter>
                 <rewrite>
                     <syntaxhighlighter>Rbm_Template_Block_Rewrite_Stynaxhighlighter</syntaxhighlighter>
                 </rewrite>
-            </plugincompany_syntaxhighlighter> 
+            </plugincompany_syntaxhighlighter>
             <rbmTemplate_adminhtml>
                 <class>Rbm_Template_Block_Adminhtml</class>
-            </rbmTemplate_adminhtml>           
+            </rbmTemplate_adminhtml>
             <rbmTemplate>
                 <class>Rbm_Template_Block</class>
-            </rbmTemplate>            
+            </rbmTemplate>
         </blocks>
-        
-    </global>   
-    
-    
-    
-    
+        <rewrite>
+            <rbm_template_url>
+                <from><![CDATA[#^/feed/(.*)#]]></from>
+                <to><![CDATA[/rt/index/view/code/$1]]></to>
+                <complete>1</complete>
+            </rbm_template_url>
+        </rewrite>
+    </global>
+
+
+
+
     <frontend>
         <routers>
             <rbmTemplate>
@@ -100,7 +106,7 @@
                 <Rbm_Template>
                     <file>rbm-template.xml</file>
                 </Rbm_Template>
-            </updates> 
+            </updates>
         </layout>
         <!--        <translate>
             <modules>
@@ -112,7 +118,7 @@
             </modules>
         </translate>-->
     </frontend>
-    <admin>        
+    <admin>
         <routers>
             <adminhtml>
                 <args>
@@ -121,7 +127,7 @@
                     </modules>
                 </args>
             </adminhtml>
-        </routers>	
+        </routers>
     </admin>
     <adminhtml>
         <layout>
@@ -129,8 +135,8 @@
                 <Rbm_Template>
                     <file>rbm-template.xml</file>
                 </Rbm_Template>
-            </updates> 
+            </updates>
         </layout>
     </adminhtml>
-    
+
 </config>

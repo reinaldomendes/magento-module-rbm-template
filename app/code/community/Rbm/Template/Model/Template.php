@@ -5,7 +5,7 @@ class Rbm_Template_Model_Template extends Mage_Rule_Model_Rule
 
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 0;
-    
+
     protected $_type_ids = null;
 
     public function _construct()
@@ -21,7 +21,10 @@ class Rbm_Template_Model_Template extends Mage_Rule_Model_Rule
 
     public function getUrl()
     {
-        return Mage::getUrl('rt/index/view', array('code' => $this->getCode()));
+        if(! $this->getCode() ){
+            return null;
+        }
+        return Mage::getBaseUrl() . 'rt/' . $this->getCode();
     }
 
     /**
@@ -37,43 +40,43 @@ class Rbm_Template_Model_Template extends Mage_Rule_Model_Rule
     /**
      * Get rule condition product combine model instance
      * @unecessary
-     * @return 
+     * @return
      */
     public function getActionsInstance()
     {
         return parent::getActionsInstance();
     }
 
-    
+
     public function getTypeInstance(){
         $ary = explode('/',$this->getType());
-        $type = end($ary);        
+        $type = end($ary);
         if(!$type){
             $type = 'product';
         }
-        
+
         return Mage::getModel("rbmTemplate/template_type_{$type}");
     }
-    
+
     /**
-     * 
+     *
      * @return array of type conditions
      */
     public function getTypeConditions(){
-        return $this->getTypeInstance()->getTypeConditions();        
+        return $this->getTypeInstance()->getTypeConditions();
     }
-    
+
     /**
-     * 
+     *
      * @return Collection of type used
      */
     public function getTypeCollection()
-    {   
+    {
         return $this->getTypeInstance()->getTypeCollection()//->addIdFilter($this->getMatchingTypeIds())
                 ->addAttributeToSelect('*');
-        
+
     }
-    
+
      /**
      * Get array of product ids which are matched by rule
      *
@@ -84,9 +87,9 @@ class Rbm_Template_Model_Template extends Mage_Rule_Model_Rule
         if (is_null($this->_type_ids)) {
             $this->_type_ids = array();
             $this->setCollectedAttributes(array());
-            
+
                 /** @var $productCollection Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection */
-            $typeCollection = $this->getTypeInstance()->getTypeCollection();                
+            $typeCollection = $this->getTypeInstance()->getTypeCollection();
             $this->getConditions()->collectValidatedAttributes($typeCollection);
 
             Mage::getSingleton('core/resource_iterator')->walk(
@@ -97,7 +100,7 @@ class Rbm_Template_Model_Template extends Mage_Rule_Model_Rule
                     'model'    => $this->getTypeInstance()->getModel(),
                 )
             );
-            
+
         }
 
         return $this->_type_ids;
@@ -112,16 +115,16 @@ class Rbm_Template_Model_Template extends Mage_Rule_Model_Rule
     public function callbackValidateType($args)
     {
         $typeModel = clone $args['model'];
-        $typeModel->setData($args['row']);        
+        $typeModel->setData($args['row']);
 
-        if ($this->getConditions()->validate($typeModel)) {            
+        if ($this->getConditions()->validate($typeModel)) {
                 $this->_type_ids[] = $typeModel->getId();
-            
+
         }
     }
-    
-    
-    
+
+
+
 
     public function getAvailableStatuses()
     {
@@ -133,7 +136,7 @@ class Rbm_Template_Model_Template extends Mage_Rule_Model_Rule
     }
 
     /**
-     * 
+     *
      * @return array()
      */
     public function getAvailableTypes()

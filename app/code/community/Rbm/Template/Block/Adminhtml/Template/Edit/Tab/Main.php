@@ -29,7 +29,7 @@ class Rbm_Template_Block_Adminhtml_Template_Edit_Tab_Main
 
 
         $form = new Varien_Data_Form();
-        
+
 
         $form->setHtmlIdPrefix('rbmTemplate_');
 
@@ -49,17 +49,21 @@ class Rbm_Template_Block_Adminhtml_Template_Edit_Tab_Main
             'disabled'  => $isElementDisabled
         ));
 
+        $note = null;
+        if($model->getCode()){
+            $note = "<a href='{$model->getUrl()}'>{$model->getUrl()}</a>";
+        }
         $fieldset->addField('code', 'text', array(
             'name'      => 'code',
             'label'     => Mage::helper('rbmTemplate')->__('URL Key'),
             'title'     => Mage::helper('rbmTemplate')->__('URL Key'),
             'required'  => true,
             'class'     => 'validate-identifier',
-            'note'      => Mage::helper('rbmTemplate')->__('{{base_url}}/rt/index/view/code/{{url key}}'),
+            'note'      => $note,
             'disabled'  => $isElementDisabled
         ));
-        
-        
+
+
         $fieldset->addField('mime_type', 'text', array(
             'name'      => 'mime_type',
             'label'     => Mage::helper('rbmTemplate')->__('Mime Type'),
@@ -69,7 +73,7 @@ class Rbm_Template_Block_Adminhtml_Template_Edit_Tab_Main
             'note'      => 'text/xml, text/html, text/csv, text/json .....',
             'disabled'  => $isElementDisabled
         ));
-        
+
         $fieldset->addField('type', 'select', array(
             'name'      => 'type',
             'label'     => Mage::helper('rbmTemplate')->__('Template Type'),
