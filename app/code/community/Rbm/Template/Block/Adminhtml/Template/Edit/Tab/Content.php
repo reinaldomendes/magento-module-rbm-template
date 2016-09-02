@@ -31,7 +31,7 @@ class Rbm_Template_Block_Adminhtml_Template_Edit_Tab_Content
         $form = new Varien_Data_Form();
          $form->setHtmlIdPrefix('rbmTemplate_');
 
-        $fieldset = $form->addFieldset('content_fieldset', array('legend'=>Mage::helper('cms')->__('Template Information')));
+        $fieldset = $form->addFieldset('content_fieldset', array('legend'=>Mage::helper('rbmTemplate')->__('Template Information')));
 
 
         $fieldset->addField('content', 'editor', array(

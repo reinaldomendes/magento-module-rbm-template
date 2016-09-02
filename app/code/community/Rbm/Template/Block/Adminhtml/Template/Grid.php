@@ -45,7 +45,7 @@ class Rbm_Template_Block_Adminhtml_Template_Grid extends Mage_Adminhtml_Block_Wi
 
         if (!Mage::app()->isSingleStoreMode()) {
             $this->addColumn('store_id', array(
-                'header'        => Mage::helper('cms')->__('Store View'),
+                'header'        => Mage::helper('rbmTemplate')->__('Store View'),
                 'index'         => 'store_id',
                 'type'          => 'store',
                 'store_all'     => true,
@@ -72,14 +72,14 @@ class Rbm_Template_Block_Adminhtml_Template_Grid extends Mage_Adminhtml_Block_Wi
         ));
         
         $this->addColumn('is_active', array(
-            'header'    => Mage::helper('cms')->__('Status'),
+            'header'    => Mage::helper('rbmTemplate')->__('Status'),
             'index'     => 'is_active',
             'type'      => 'options',
             'options'   => Mage::getSingleton('rbmTemplate/template')->getAvailableStatuses()
         ));
         
          $this->addColumn('url', array(
-            'header'    => Mage::helper('cms')->__('Url'),
+            'header'    => Mage::helper('rbmTemplate')->__('Url'),
             'getter'     => 'getUrlWithAnchor',
             'type'      => 'text',
             'filter' => false
