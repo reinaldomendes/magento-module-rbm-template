@@ -44,10 +44,7 @@
                 <entities>
                     <template>
                         <table>rbm_template_templates</table>
-                    </template>
-                    <filters>
-                        <table>rbm_template_filters</table>
-                    </filters>
+                    </template>                    
                 </entities>
             </rbmTemplate_resource>
         </models>

@@ -28,7 +28,7 @@
 <config>
     <modules>
         <Rbm_Template>
-            <active>true</active>
+            <active>false</active>
             <codePool>community</codePool>            
             <depends>
                 <Mage_Catalog/>
