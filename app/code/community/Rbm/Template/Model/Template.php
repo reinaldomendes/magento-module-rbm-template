@@ -26,6 +26,11 @@ class Rbm_Template_Model_Template extends Mage_Rule_Model_Rule
         }
         return Mage::getBaseUrl() . 'feed/' . $this->getCode();
     }
+    public function getUrlWithAnchor(){
+        if($this->getUrl()){
+            return "<a href='{$this->getUrl()}' target='_blank'>{$this->getUrl()}</a>";
+        }
+    }
 
     /**
      * Get rule condition combine model instance
