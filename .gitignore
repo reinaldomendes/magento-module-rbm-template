@@ -3,6 +3,7 @@ npm-debug.log
 *.tar.gz
 *.tar.*
 *.tgz
+app/etc/local.xml
 /dev
 /magento
 /vendor/
