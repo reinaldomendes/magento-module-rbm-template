@@ -20,8 +20,8 @@ class Rbm_Template_Block_Adminhtml_Template_Edit extends Mage_Adminhtml_Block_Wi
     {
          $this->_blockGroup = 'rbmTemplate_adminhtml';
          $this->_objectId   = 'template_id';
-        $this->_controller = 'template';        
-        
+        $this->_controller = 'template';
+
 
         parent::__construct();
 
@@ -82,6 +82,10 @@ class Rbm_Template_Block_Adminhtml_Template_Edit extends Mage_Adminhtml_Block_Wi
             'back'       => 'edit',
             'active_tab' => '{{tab_id}}'
         ));
+    }
+
+    public function getFormActionUrl(){
+        return  $this->getUrl('*/*/save');
     }
 
     /**
