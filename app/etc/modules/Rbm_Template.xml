@@ -28,14 +28,14 @@
 <config>
     <modules>
         <Rbm_Template>
-            <active>false</active>
-            <codePool>community</codePool>            
+            <active>true</active>
+            <codePool>community</codePool>
             <depends>
                 <Mage_Catalog/>
                 <Mage_Core/>
-                
+
             </depends>
         </Rbm_Template>
-        
+
     </modules>
 </config>

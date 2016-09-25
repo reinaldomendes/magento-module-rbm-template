@@ -44,7 +44,7 @@
                 <entities>
                     <template>
                         <table>rbm_template_templates</table>
-                    </template>                    
+                    </template>
                 </entities>
             </rbmTemplate_resource>
         </models>
@@ -105,15 +105,7 @@
                 </Rbm_Template>
             </updates>
         </layout>
-        <!--        <translate>
-            <modules>
-                <Rbm_Facebook>
-                    <files>
-                        <default>Rbm_Template.csv</default>
-                    </files>
-                </Rbm_Facebook>
-            </modules>
-        </translate>-->
+        
     </frontend>
     <admin>
         <routers>
