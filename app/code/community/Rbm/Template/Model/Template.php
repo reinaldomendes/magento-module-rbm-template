@@ -53,6 +53,13 @@ class Rbm_Template_Model_Template extends Mage_Rule_Model_Rule
     }
 
 
+    public function getStore(){
+        if(!$this->hasData('store')){
+            $this->setStore(Mage::app()->getStore());
+        }
+        return $this->getData('store');
+    }
+
     public function getTypeInstance(){
         $ary = explode('/',$this->getType());
         $type = end($ary);
@@ -60,7 +67,7 @@ class Rbm_Template_Model_Template extends Mage_Rule_Model_Rule
             $type = 'product';
         }
 
-        return Mage::getModel("rbmTemplate/template_type_{$type}");
+        return Mage::getModel("rbmTemplate/template_type_{$type}")->setStore($this->getStore());
     }
 
     /**

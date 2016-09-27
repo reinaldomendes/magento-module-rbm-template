@@ -12,10 +12,28 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
 
     public function getCacheKey($value)
     {
+
+        $id = $this->getTemplateModel()->getId();
+        $serializedConditions = $this->getTemplateModel()->getSerializedConditions();
+        $data = $this->getTemplateModel()->getData();
+
+        foreach($data as $key => $value){
+            if(is_object($value)){
+                $value = join(',',(array)$value);
+            }
+            $data[$key]  = $value;
+        }
+
+        $preKeyPrepare = join(',',$data);
+        $keyPrepare = $preKeyPrepare . join('_',
+                array($value, strlen($value), $id, $serializedConditions, strlen($serializedConditions)));
+        $keyUpdate = md5($keyPrepare);
+
+
         return join('_',
                 array(
             self::CACHE_TAG,
-            md5($value),
+            $keyUpdate,
         ));
     }
 
@@ -65,19 +83,16 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
 
         $bkpTemplateVars = $this->_templateVars;
         $result = '';
-        Varien_Profiler::enable();
-        
-        
+
         $matchIds = $this->getTemplateModel()->getMatchingTypeIds();
-        
-        
-        
+
+
         $chunks = array_chunk($matchIds, 100);
         $baseCollectionVariable = $collectionVariable;
-        
+
         foreach ($chunks as $chunk) {
-            $collectionVariable = clone $baseCollectionVariable;            
-            $collectionVariable->addIdFilter($chunk);            
+            $collectionVariable = clone $baseCollectionVariable;
+            $collectionVariable->addIdFilter($chunk);
             foreach ($collectionVariable as $item) {
                 /* @var $item Mage_Catalog_Model_Category */
                 if ($params['as']) {
@@ -85,8 +100,10 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
                 }
                 $result .= parent::filter($foreachTemplate);
                 unset($item);
+                usleep(100); //1000 products = 1000 * 100(microsegundos) = 100ms a mais mais diminui a caraga do servidor
             }
-        }        
+
+        }
         $this->setVariables($bkpTemplateVars);
         return $result;
     }
@@ -116,7 +133,7 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
     }
 
     /**
-     * 
+     *
      * @return Rbm_Template_Model_Template
      */
     public function getTemplateModel()
@@ -125,7 +142,7 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
     }
 
     /**
-     * 
+     *
      * @param Rbm_Template_Model_Template $templateModel
      * @return \Rbm_Template_Model_Template_Filter
      */
@@ -146,25 +163,27 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
     }
 
     /**
-     * 
+     *
      * @param string $code - rbm template code
      * @return string
      */
     public function filter($value)
     {
 
-        $id = $this->getTemplateModel()->getId();
-        ;
-        $serializedConditions = $this->getTemplateModel()->getSerializedConditions();
-        $keyPrepare = join('_',
-                array($value, strlen($value), $id, $serializedConditions, strlen($serializedConditions)));
-        $keyUpdate = md5($keyPrepare);
-        $cacheKey = $this->getCacheKey($keyUpdate);
+
+        $cacheKey = $this->getCacheKey($value);
+
+        $result = Mage::app()->getCache()->load($cacheKey);
+
+        $lockFile = Mage::getBaseDir('var') . DS . 'locks' . DS . "rbm-template-{$this->getTemplateModel()->getId()}.lock";
+        $p = fopen($lockFile,'w');
+        while(!flock($p,LOCK_EX|LOCK_NB)){            
+            usleep(1000 * 100);
+        }
 
 
-        $result = Mage::app()->getCache()->load($cacheKey);        
+        $result = Mage::app()->getCache()->load($cacheKey);
         if (!$result) {
-
             // "depend" and "if" operands should be first
             foreach (array(
         self::CONSTRUCTION_FOREACH_PATTERN => 'foreachDirective',
@@ -191,8 +210,12 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
 
             $result = parent::filter($value);
             Mage::app()->getCache()->save($result, $cacheKey,
-                    array(self::CACHE_TAG), 600);
+                    array(self::CACHE_TAG), 3600);
         }
+
+        flock($p,LOCK_UN);
+        fclose($p);
+
         return $result;
     }
 

@@ -11,7 +11,7 @@
  *
  * @author reinaldo
  */
-class Rbm_Template_Model_Template_Type_Product implements Rbm_Template_Model_Template_Type_Interface
+class Rbm_Template_Model_Template_Type_Product extends Varien_Object implements Rbm_Template_Model_Template_Type_Interface
 {
 
     /**
@@ -24,6 +24,12 @@ class Rbm_Template_Model_Template_Type_Product implements Rbm_Template_Model_Tem
         return array(Mage::helper('rbmTemplate')->__('Product Attributes') => $productCondition);
     }
 
+    public function getStore(){
+        if(!$this->hasData('store')){
+            $this->setStore(Mage::app()->getStore());
+        }
+        return $this->getData('store');
+    }
     /**
      *
      * @return Mage_Catalog_Model_Resource_Product_Collection
@@ -32,12 +38,14 @@ class Rbm_Template_Model_Template_Type_Product implements Rbm_Template_Model_Tem
     {
         $collection = Mage::getResourceModel('catalog/product_collection');
         /* @var $collection Mage_Catalog_Model_Resource_Product_Collection */
-        $collection->addStoreFilter(Mage::app()->getStore())
+        
+        $collection->addStoreFilter($this->getStore())
                 ->addMinimalPrice()
                 ->addFinalPrice()
                ->addAttributeToFilter('status', array('eq' => 1));
 
         Mage::getSingleton('catalog/product_visibility')->addVisibleInSiteFilterToCollection($collection);
+
 
         return $collection;
     }
