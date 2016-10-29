@@ -33,6 +33,7 @@
        </reference>
    </adminhtml_rbmtemplate_template_index>
    <adminhtml_rbmtemplate_template_edit>
+       <update handle="plugincompany_codemirror_jquery" />
        <update handle="plugincompany_codemirror" /> <!--syntax highlighter-->
        
        <reference name="head">

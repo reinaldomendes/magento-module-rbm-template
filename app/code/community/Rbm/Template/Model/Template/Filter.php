@@ -9,6 +9,12 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
     protected $_collection = null;
 
     const CACHE_TAG = 'rbm_template_2';
+    
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_modifiers['price'] = array($this, 'modifierPrice');
+    }
 
     public function getCacheKey($value)
     {
@@ -131,6 +137,8 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
 
         return $result;
     }
+    
+    
 
     /**
      *
@@ -154,12 +162,18 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
     }
 
     public function modifierEscape($value, $type = 'html')
-    {
+    {        
         switch ($type) {
             case 'xml':
                 return htmlspecialchars($value, ENT_XML1, 'UTF-8');
+            
         }
+        
         return parent::modifierEscape($value);
+    }
+    
+    public function modifierPrice($value){
+        return number_format($value, 2, '.', '');
     }
 
     /**
@@ -169,11 +183,13 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
      */
     public function filter($value)
     {
-
-
         $cacheKey = $this->getCacheKey($value);
-
-        $result = Mage::app()->getCache()->load($cacheKey);
+        $result = Mage::app()->getCache()->load($cacheKey);     
+        
+        if($result){
+            return $result;
+        }
+        
 
         $lockFile = Mage::getBaseDir('var') . DS . 'locks' . DS . "rbm-template-{$this->getTemplateModel()->getId()}.lock";
         $p = fopen($lockFile,'w');
@@ -182,7 +198,7 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
         }
 
 
-        $result = Mage::app()->getCache()->load($cacheKey);
+        
         if (!$result) {
             // "depend" and "if" operands should be first
             foreach (array(
