@@ -131,7 +131,7 @@
     <crontab>
         <jobs>
             <rbm_template>
-                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <schedule><cron_expr>15 */2 * * *</cron_expr></schedule>
                 <run><model>rbmTemplate/cron::cacheAllFeeds</model></run>
             </rbm_template>
         </jobs>

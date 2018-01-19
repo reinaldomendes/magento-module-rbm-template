@@ -10,10 +10,34 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
 
     const CACHE_TAG = 'rbm_template_2';
     
+    const CACHE_DIR = 'rbm-template';
+    
+    protected $_useTmpDir = false;
+    
+    
+    
     public function __construct()
     {
         parent::__construct();
         $this->_modifiers['price'] = array($this, 'modifierPrice');
+        $this->_modifiers['striptags'] = array($this, 'modifierStriptags');
+    }
+    
+    public function useTmpDir($flag=true){
+        $this->_useTmpDir = $flag;
+    }
+    
+    public function getCacheDir(){
+        $tmpDir = $this->_useTmpDir ? DS . "tmp" : '';
+        
+        $dir = Mage::getBaseDir('var'). $tmpDir .  DS . self::CACHE_DIR;
+        if(!is_dir($dir)){
+            mkdir($dir, 0777, true);
+        }
+        return $dir;
+    }
+    public function getCacheFile($value){
+        return $this->getCacheDir() . DS . $this->getCacheKey($value);
     }
 
     public function getCacheKey($value)
@@ -25,16 +49,20 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
 
         foreach($data as $key => $value){
             if(is_object($value)){
-                $value = join(',',(array)$value);
+                $value = md5(serialize($value));
             }
             $data[$key]  = $value;
         }
-
+        $data['version'] = '1.1';
+        $data['protocol'] = Mage::app()->getRequest()->isSecure() ? 'https' : 'http';
+        $data['store_id'] = $this->getTemplateModel()->getStore()->getId();
+        
         $preKeyPrepare = join(',',$data);
         $keyPrepare = $preKeyPrepare . join('_',
                 array($value, strlen($value), $id, $serializedConditions, strlen($serializedConditions)));
         $keyUpdate = md5($keyPrepare);
-
+        
+        
 
         return join('_',
                 array(
@@ -105,8 +133,7 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
                     $this->setVariables(array($params['as'] => $item) + $this->_templateVars);
                 }
                 $result .= parent::filter($foreachTemplate);
-                unset($item);
-                usleep(100); //1000 products = 1000 * 100(microsegundos) = 100ms a mais mais diminui a caraga do servidor
+                unset($item);                 
             }
 
         }
@@ -175,6 +202,10 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
     public function modifierPrice($value){
         return number_format($value, 2, '.', '');
     }
+    
+    public function modifierStriptags($value){
+        return strip_tags($value);
+    }
 
     /**
      *
@@ -182,14 +213,11 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
      * @return string
      */
     public function filter($value)
-    {
-        $cacheKey = $this->getCacheKey($value);
-        $result = Mage::app()->getCache()->load($cacheKey);     
-        
-        if($result){
-            return $result;
+    {        
+        $file = $this->getCacheFile($value);
+        if(is_file($file)){            
+            return file_get_contents($file);
         }
-        
 
         $lockFile = Mage::getBaseDir('var') . DS . 'locks' . DS . "rbm-template-{$this->getTemplateModel()->getId()}.lock";
         $p = fopen($lockFile,'w');
@@ -225,8 +253,8 @@ class Rbm_Template_Model_Template_Filter extends Mage_Core_Model_Email_Template_
             }
 
             $result = parent::filter($value);
-            Mage::app()->getCache()->save($result, $cacheKey,
-                    array(self::CACHE_TAG), 3600);
+            file_put_contents($file,$result);            
+            
         }
 
         flock($p,LOCK_UN);
