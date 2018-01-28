@@ -11,12 +11,12 @@
  *
  * @author reinaldo
  */
-class Rbm_Template_Model_Template_Type_Category
+class Rbm_Template_Model_Template_Type_Category extends Varien_Object 
         implements Rbm_Template_Model_Template_Type_Interface
 {
 
     /**
-     * 
+     *
      * @return array(RbmTemplate_Model_Rule_Condition_Product)
      */
     public function getTypeConditions()
@@ -26,7 +26,7 @@ class Rbm_Template_Model_Template_Type_Category
     }
 
     /**
-     * 
+     *
      * @return Mage_Catalog_Model_Resource_Product_Collection
      */
     public function getTypeCollection()
@@ -38,14 +38,14 @@ class Rbm_Template_Model_Template_Type_Category
         $collection->setStore(Mage::app()->getStore())
                 ->addAttributeToFilter('is_active', array('eq' => 1));
 
-        
+
 
         return $collection;
     }
-    
+
     public function getModel()
     {
-        return Mage::getModel('catalog/category');        
+        return Mage::getModel('catalog/category');
     }
 
 }
